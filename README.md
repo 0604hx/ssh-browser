@@ -1,6 +1,15 @@
 # ssh-broswer
 > 基于 `Electron` 搭建的`ssh`隧道浏览器，主要用于需要通过隧道进行 web 访问的场景
 
+**运行截图**
+
+![](./docs/screens/index.png)
+
+![](./docs/screens/tunnel-edit.png)
+
+![](./docs/screens/tunnel-status.png)
+
+
 ## SSH 授权简述
 > `ssh` 常用的方式有`帐密`、`privateKey`
 
@@ -21,6 +30,7 @@ userdel test
 用户创建后就能使用`test`登录
 
 ### privateKey
+> TODO
 
 ## 构建&运行
 > 图标在线转换：<https://www.easyicon.net/covert/>

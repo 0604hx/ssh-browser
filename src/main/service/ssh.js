@@ -75,8 +75,8 @@ module.exports = {
         let alive = _isOnWork()
         return {
             alive:   alive,
-            address: config.local,
-            remote:  `${config.dstHost}:${config.dstPort}`,
+            address: config?config.local:"",
+            remote:  config?`${config.dstHost}:${config.dstPort}`:"",
             connect: alive?instance.getConnect():-1,
             receive: alive?instance.getReceive():-1,
             date:    alive?instance.getDate():0

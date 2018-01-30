@@ -60,7 +60,7 @@
                     本地
                     <i-input style="width:60px" v-model="tunnel.localPort" placeholder="本地端口"></i-input>
                     <span class="info">映射到</span>
-                    <div class="ivu-input-wrapper" style="width:180px; display:inline-block">
+                    <div class="ivu-input-wrapper" style="width:220px; display:inline-block">
                         <i-input v-model="tunnel.dstHost" placeholder="远程主机">
                             <Select v-model="tunnel.protocol" slot="prepend" style="width:80px">
                                 <Option value="http">http://</Option>
