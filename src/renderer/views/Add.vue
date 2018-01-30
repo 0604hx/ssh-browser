@@ -58,11 +58,18 @@
 
                 <Form-item prop="dstHost">
                     本地
-                    <i-input style="width:120px" v-model="tunnel.localPort" placeholder="本地端口,默认8000"></i-input>
+                    <i-input style="width:60px" v-model="tunnel.localPort" placeholder="本地端口"></i-input>
                     <span class="info">映射到</span>
-                    <i-input style="width:100px" v-model="tunnel.dstHost" placeholder="远程主机"></i-input>
+                    <div class="ivu-input-wrapper" style="width:180px; display:inline-block">
+                        <i-input v-model="tunnel.dstHost" placeholder="远程主机">
+                            <Select v-model="tunnel.protocol" slot="prepend" style="width:80px">
+                                <Option value="http">http://</Option>
+                                <Option value="https">https://</Option>
+                            </Select>
+                        </i-input>
+                    </div>
                     :
-                    <i-input style="width:120px" v-model="tunnel.dstPort"  placeholder="远程端口,默认80"></i-input>
+                    <i-input style="width:60px" v-model="tunnel.dstPort"  placeholder="远程端口"></i-input>
                 </Form-item>
             </i-form>
         </div>
@@ -78,6 +85,14 @@
 <script>
     const SSH = "ssh"
     const SSH_TEST = "ssh.test"
+
+    const fields = ['localPort', 'dstPort']
+
+    const _fixup = t=>{
+        let nt = JSON.parse(JSON.stringify(t))
+        fields.forEach(v=>nt[v] = parseInt(nt[v]))
+        return nt
+    }
 
     export default {
         name:"index",
@@ -125,6 +140,7 @@
                     localPort:8000,
                     dstHost:"127.0.0.1",
                     dstPort:80,
+                    https:false,
                     remember:false
                 }
 
@@ -133,7 +149,7 @@
             save(){
                 this.$refs['tunnelForm'].validate((valid) => {
                     if (valid) {
-                        this.$emit("submit", this.index, this.tunnel)
+                        this.$emit("submit", this.index, _fixup(this.tunnel))
                     } else {
                         M.notice.warn("请填写完整的登录信息")
                     }
@@ -143,7 +159,7 @@
                 this.$refs['tunnelForm'].validate((valid) => {
                     if (valid) {
                         this.working = true
-                        this.$electron.ipcRenderer.send(SSH_TEST, this.tunnel)
+                        this.$electron.ipcRenderer.send(SSH_TEST, _fixup(this.tunnel))
                     } else {
                         M.notice.warn("请填写完整的登录信息")
                     }

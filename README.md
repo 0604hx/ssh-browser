@@ -27,7 +27,7 @@ userdel test
 
 ### 感谢
 
-[ssh2]()https://github.com/mscdex/ssh2)
+[ssh2](https://github.com/mscdex/ssh2)
 
 ### 问题汇总
 

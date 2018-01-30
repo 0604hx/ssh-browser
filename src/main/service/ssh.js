@@ -15,7 +15,7 @@ const _buildConfig = cfg=>{
     let host = cfg.host.split(":")
 
     return {
-        https: cfg.https || false,
+        protocol: cfg.protocol || "http",
         username:cfg.user,
         password:cfg.password,
         host:host[0],
@@ -55,7 +55,7 @@ module.exports = {
                         reject(err)
                     }else{
                         config = _cfg
-                        config.local = `${_cfg.https?"https":"http"}://${_cfg.localHost}:${_cfg.localPort}`
+                        config.local = `${_cfg.protocol}://${_cfg.localHost}:${_cfg.localPort}`
 
                         ports[_cfg.localPort] = `${_cfg.dstHost}:${_cfg.dstPort}`
                         resolve(_cfg)

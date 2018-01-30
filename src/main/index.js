@@ -43,7 +43,7 @@ function createWindow() {
     title: config.name,
     height: 760,
     useContentSize: true,
-    width: 1280,
+    width: 1440,
     icon: config.icon
   })
 

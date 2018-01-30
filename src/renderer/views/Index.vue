@@ -18,10 +18,11 @@
                             <Button type="ghost" shape="circle" size="small" icon="compose" @click="toEdit($ti)" title="编辑"></Button>
                             <Button type="ghost" shape="circle" size="small" icon="ios-trash" @click="del($ti)" title="删除"></Button>
                         </span>
-                        <p class="info"><b>{{t.host}}</b></p>
-                        <p>{{t.user}}</p>
-                        <p><span class="h">本地</span> <span class="info">{{t.localPort}}</span> 映射至 <span class="info">{{t.dstHost}}:{{t.dstPort}}</span></p>
+                        <p class="info"><b>{{t.user}} @ {{t.host}}</b></p>
                         <div class="h">{{t.type=='pwd'?"密码方式授权":"私钥文件授权"}}</div>
+                        <p class="h">本地端口 <span class="ml10 info">{{t.localPort}}</span></p>
+                        <p class="h">远程映射 <span class="ml10 info">{{t.protocol}}://{{t.dstHost}}:{{t.dstPort}}</span></p>
+                        
                         <Button :loading="t.loading" :disabled="t.connected" class="mt10" long 
                             type="success" @click="connect($ti)" v-text="t.connected?'已连接':'立即建立本地端口通道'"></Button>
                     </Card>
