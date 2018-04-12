@@ -3,7 +3,7 @@
  */
 const path = require("path")
 
-const {dialog, nativeImage} = require('electron')
+const {dialog, nativeImage, Notification} = require('electron')
 const moment = require("moment")
 const SshUtil = require("../service/ssh")
 const Util = require("../service/util")
@@ -78,9 +78,28 @@ const aboutUs = ()=>{
     dialog.showMessageBox({title: "关于 SSH-Browser", message:config.summary, detail: "当前版本 "+config.version, icon:icons.about})
 }
 
+/**
+ * 显示弹出信息
+ * @param {*} msg 
+ * @param {*} title 
+ * @param {*} onClick 
+ */
+const notify = (msg, title, onClick)=>{
+    let notice = new Notification({
+        body: msg,
+        title:title
+    })
+    notice.on('click', () => {
+        onClick && onClick()
+    })
+    console.log("notify===>", notice)
+    notice.show()
+}
+
 module.exports = {
     connectionSummary,
     icons,
     ok, fail, bug,info,
-    aboutUs
+    aboutUs,
+    notify
 }

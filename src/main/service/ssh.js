@@ -63,6 +63,7 @@ module.exports = {
                 })
                 instance.on("error", err => {
                     console.log("server error", err)
+                    reject(err)
                 })
             })
             .catch(err => reject(new Error("无法连接到 SSH 服务器，请检查你的帐密或者私钥是否正确:"+err.message)))

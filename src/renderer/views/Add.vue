@@ -26,7 +26,7 @@
             <i-form ref="tunnelForm" :model="tunnel" :rules="ruleValidate" :label-width="0" slot="left">
                 <Form-item prop="title">
                     <i-input v-model="tunnel.title" placeholder="备注信息">
-                        <Icon type="social-tux" slot="prepend"></Icon>
+                        <Icon type="ios-information-outline" slot="prepend"></Icon>
                     </i-input>
                 </Form-item>
                 <Form-item prop="host">
@@ -58,7 +58,7 @@
 
                 <Form-item prop="dstHost">
                     本地
-                    <i-input style="width:60px" v-model="tunnel.localPort" placeholder="本地端口"></i-input>
+                    <i-input style="width:57px" v-model="tunnel.localPort" placeholder="本地端口"></i-input>
                     <span class="info">映射到</span>
                     <div class="ivu-input-wrapper" style="width:220px; display:inline-block">
                         <i-input v-model="tunnel.dstHost" placeholder="远程主机">
@@ -69,7 +69,7 @@
                         </i-input>
                     </div>
                     :
-                    <i-input style="width:60px" v-model="tunnel.dstPort"  placeholder="远程端口"></i-input>
+                    <i-input style="width:57px" v-model="tunnel.dstPort"  placeholder="远程端口"></i-input>
                 </Form-item>
             </i-form>
         </div>

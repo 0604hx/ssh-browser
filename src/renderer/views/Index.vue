@@ -108,7 +108,7 @@
                     if(!!err)
                         M.notice.error(err, `${t.title} 通道失败`)
                     else
-                        M.notice.ok(`本地 ${d.address} >> ${d.remote}`,`${t.title} 通道连接成功`)
+                        M.notice.ok(`本地 ${d.localPort} >> ${d.dstPort}，协议为 ${d.protocol}`,`${t.title} 通道连接成功`)
                 }
             })
 

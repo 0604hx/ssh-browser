@@ -4,7 +4,7 @@
 const fs = require("fs")
 const path = require("path")
 
-let version = "1.0.1"
+let version = "1.0.2"
 
 module.exports = {
     name:"SSH-Browser "+version,

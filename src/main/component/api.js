@@ -16,6 +16,12 @@ let SSH = "ssh"
 let SSH_TEST = "ssh.test"
 let SSH_PORT = "ssh.port"
 
+const errHumanTip = e=>{
+    if(e.code && e.code=="EADDRINUSE")
+        return ` （无法监听端口 ${e.port}，可能此端口正在被占用）`
+    return ""
+}
+
 module.exports = (mainWindow) => {
     ipcMain.on('F12', (e, args) => {
         mainWindow.webContents.openDevTools()
@@ -48,7 +54,8 @@ module.exports = (mainWindow) => {
             })
         })
         .catch(err=>{
-            e.sender.send(SSH, err.message)
+            let msg = err.message+ errHumanTip(err)
+            e.sender.send(SSH, msg)
         })
     })
 

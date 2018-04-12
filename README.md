@@ -63,3 +63,12 @@ npm run build
 ---
 
 This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[195b599](https://github.com/SimulatedGREG/electron-vue/tree/195b59990e317184cbc3603f5ed7aed6ce05f7c9) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+
+
+## LOGS
+
+### v1.0.2
+
+* iview 升级到 `2.13.0`
+* 增加隧道连接失败的友情提示
+* 修改部分`UI`

@@ -1,6 +1,6 @@
 {
   "name": "ssh-browser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "0604hx <zxingming@foxmail.com>",
   "description": "基于 `Electron` 搭建的`ssh`隧道浏览器，主要用于需要通过隧道进行 web 访问的场景",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "files": [
       "dist/electron/**/*"
     ],
-    "asar":true,
+    "asar": true,
     "dmg": {
       "contents": [
         {
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "iview": "^2.4.0",
+    "iview": "^2.13.0",
     "moment": "^2.18.1",
     "ssh2": "^0.5.5",
     "store": "^2.0.12",

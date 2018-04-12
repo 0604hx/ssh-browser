@@ -52,8 +52,10 @@ module.exports = (mainWindow) => {
                     if (index == 0) {
                         SshUtil.close(success=>{
                             if(success==true){
-                                if(_isOnMainPage(mainWindow))
+                                if(_isOnMainPage(mainWindow)){
+                                    Tip.notify("隧道关闭成功")
                                     return
+                                }
                                 dialog.showMessageBox({
                                     message:"本地端口映射隧道已经关闭，现在可以开启其他通道了 ^.^ \n\n现在打开程序首页吗？",
                                     buttons:['好！','先不要打开']
