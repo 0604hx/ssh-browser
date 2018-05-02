@@ -17,7 +17,7 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "ssh-browser",
+    "productName": "SSHBrowser",
     "appId": "org.nerve.ssh-browser",
     "directories": {
       "output": "build"
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "iview": "^2.13.0",
+    "iview": "^2.13.1",
     "moment": "^2.18.1",
     "ssh2": "^0.5.5",
     "store": "^2.0.12",
@@ -76,7 +76,7 @@
     "css-loader": "^0.28.4",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "1.7.5",
+    "electron": "1.8.6",
     "electron-builder": "^19.19.1",
     "electron-debug": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
