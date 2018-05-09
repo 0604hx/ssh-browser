@@ -1,4 +1,4 @@
-const { app, dialog, Menu } = require("electron")
+const { app, dialog, Menu, shell } = require("electron")
 const {connectionSummary} = require("./tip")
 
 module.exports = (mainWindow) => {
@@ -19,7 +19,7 @@ module.exports = (mainWindow) => {
             submenu: [
                 {
                     label: 'Get code',
-                    click() { require('electron').shell.openExternal('https://electron.atom.io') }
+                    click() { shell.openExternal('https://electron.atom.io') }
                 }
             ]
         }

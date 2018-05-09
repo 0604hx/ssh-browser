@@ -4,12 +4,19 @@
 const fs = require("fs")
 const path = require("path")
 
-let version = "1.0.2"
+const pk = require("../../package.json")
+
+let BUILD_ON = ""
+
+let buildFile = path.join(__dirname, "main.js")
+BUILD_ON = fs.existsSync(buildFile)? fs.statSync(buildFile).ctime : "dev-mode"
 
 module.exports = {
-    name:"SSH-Browser "+version,
-    version,
-    summary:"基于 Electron 搭建的 ssh 隧道浏览器，主要用于需要通过隧道进行 web 访问的场景",
+    name: pk.name,
+    summary: pk.description,
+    version: pk.version,
+    buildOn: BUILD_ON,
+    author: pk.author,
 
     /**
      * 系统托盘相关

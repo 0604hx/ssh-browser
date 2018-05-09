@@ -52,12 +52,16 @@
       <router-view></router-view>
     </div>
     <BackTop></BackTop>
+    <Version></Version>
   </div>
 </template>
 
 <script>
+  import Version from 'C/version.vue'
+
   export default {
     name: 'SSH-Browser',
+    components:{Version},
     methods: {
     }
   }

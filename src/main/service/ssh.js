@@ -93,5 +93,7 @@ module.exports = {
         else
             if(cb) cb(false)
     },
-    getPorts: ()=> ports
+    getPorts: ()=> {
+        return ports
+    }
 }

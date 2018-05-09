@@ -7,7 +7,7 @@
  * 2018年1月25日
  *  1. 发现在这里不能使用 JSON 对象 =.=
  */
-const { ipcMain, dialog } = require('electron')
+const { ipcMain, dialog, ipcRenderer } = require('electron')
 // import SshUtil from "./service/ssh"
 const SshUtil = require('../service/ssh')
 const Tip = require("../component/tip")
@@ -16,8 +16,10 @@ let SSH = "ssh"
 let SSH_TEST = "ssh.test"
 let SSH_PORT = "ssh.port"
 
+let PORT_IN_USE = ['EACCES', 'EADDRINUSE']
+
 const errHumanTip = e=>{
-    if(e.code && e.code=="EADDRINUSE")
+    if(e.code && PORT_IN_USE.indexOf(e.code)>-1)
         return ` （无法监听端口 ${e.port}，可能此端口正在被占用）`
     return ""
 }
@@ -54,6 +56,7 @@ module.exports = (mainWindow) => {
             })
         })
         .catch(err=>{
+            console.log("----------------", err)
             let msg = err.message+ errHumanTip(err)
             e.sender.send(SSH, msg)
         })

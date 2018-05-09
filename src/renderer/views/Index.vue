@@ -3,6 +3,7 @@
     .mainDiv {
         width: 900px;
         margin: 100px auto;
+        margin-bottom: 0px;
     }
     .tunnelCard .ivu-card-extra {top:10px}
 </style>
@@ -99,6 +100,7 @@
             }
         },
         mounted() {
+            window.remote = this.$electron.remote
             this.tunnels = S.get(TUNNEL, [])
 
             this.$electron.ipcRenderer.on(SSH, (e,err,d)=>{

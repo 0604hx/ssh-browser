@@ -72,3 +72,10 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 * iview 升级到 `2.13.0`
 * 增加隧道连接失败的友情提示
 * 修改部分`UI`
+
+### v1.0.3
+
+* 打包统一修改为 `ia32`（程序体积得到10%的缩减）
+* 增加 `preload.js`（目前没有实际运用）
+* 程序主页增加版本信息
+* 修复：断开通道后主页按钮不更新的bug

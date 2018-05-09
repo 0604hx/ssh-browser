@@ -7,6 +7,7 @@ const api = require("./component/api")
 const AppMenu = require("./component/menu")
 const AppTray = require("./component/tray")
 const AppEvent = require("./component/event")
+const Tip = require("./component/tip")
 
 /**
  * Set `__static` path to static files in production
@@ -16,7 +17,7 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 //设置常量信息
-global.version = config.version
+global.config = config
 
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
@@ -44,7 +45,10 @@ function createWindow() {
     height: 760,
     useContentSize: true,
     width: 1440,
-    icon: config.icon
+    icon: config.icon,
+    webPreferences: {
+      preload: path.join(__static, '/preload.js')
+    }
   })
 
   mainWindow.setMenu(null)
@@ -79,6 +83,22 @@ function createWindow() {
 
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+
+  afterWindowCreate()
+}
+
+function afterWindowCreate(){
+  mainWindow.webContents.on("did-finish-load", ()=>{
+    let web = mainWindow.webContents
+    if(web.getURL().indexOf(MAIN_PAGE)==0 || web.getURL().indexOf("file:")==0){
+      web.executeJavaScript(
+        `
+          window.config = ${JSON.stringify(config)};
+          console.log("OK");
+        `
+      )
+    }
   })
 }
 
