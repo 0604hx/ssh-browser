@@ -1,6 +1,6 @@
 {
   "name": "ssh-browser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "0604hx <zxingming@foxmail.com>",
   "description": "基于 Electron 搭建的 ssh 隧道浏览器，主要用于需要通过隧道进行 web 访问的场景",
   "license": "MIT",

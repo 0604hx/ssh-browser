@@ -8,7 +8,7 @@
 </style>
 
 <template>
-    <Modal class="loginM" v-model="show" width="450" :styles="{top:'20px'}" :maskClosable="false">
+    <Modal class="loginM" v-model="show" width="550" :styles="{top:'20px'}" :maskClosable="false">
         <div slot="header" class="c">
             <Row>
                 <Col span="5" class="l"><img width="72px" src="../assets/security.svg"></Col>
@@ -43,16 +43,21 @@
                 <!--目前只提供密码登录-->
                 <!-- <Form-item style="margin-bottom: 0px;">
                     <RadioGroup v-model="tunnel.type">
-                        <Radio label="pwd">密码登录</Radio>
-                        <Radio label="privateKey">私钥文件登录</Radio>
+                        <Radio label="raw">密码登录</Radio>
+                        <Radio label="key">私钥文件登录</Radio>
                     </RadioGroup>
                     <span class="h" v-text="tunnel.type=='pwd'?'使用输入密码的方式进行登录':'使用私钥方式登录，请选择私钥文件'"></span>
                 </Form-item> -->
 
-                <Form-item prop="password" class="pwdItem" v-if="tunnel.type=='pwd'">
-                    <i-input v-model="tunnel.password" type="password" placeholder="请输入登录密码">
+                <Form-item prop="password" class="pwdItem">
+                    <i-input v-model="tunnel.password" :type="tunnel.type=='raw'?'password':'text'"
+                        :placeholder="tunnel.type=='raw'?'请输入登录密码':'请填写私钥文件的完整路径'">
                         <Icon type="ios-locked-outline" slot="prepend"></Icon>
-                        <i-switch v-model="tunnel.remember" slot="append" title="记住密码，方便下次登录，请慎用"></i-switch>
+                        <!-- <i-switch v-model="tunnel.remember" slot="append" title="记住密码，方便下次登录，请慎用"></i-switch> -->
+                        <RadioGroup v-model="tunnel.type" slot="append">
+                            <Radio label="raw">密码</Radio>
+                            <Radio label="key">私钥</Radio>
+                        </RadioGroup>
                     </i-input>
                 </Form-item>
 
@@ -134,13 +139,13 @@
                 this.index = index
                 this.tunnel = tunnel && tunnel.host ? tunnel : {
                     host:"localhost:22",
-                    name:'root',
+                    user:'root',
                     password:'',
-                    type:"pwd",
+                    type:"raw",
                     localPort:8000,
                     dstHost:"127.0.0.1",
                     dstPort:80,
-                    https:false,
+                    protocol:"http",
                     remember:false
                 }
 

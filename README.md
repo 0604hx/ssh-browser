@@ -79,3 +79,8 @@ This project was generated with [electron-vue](https://github.com/SimulatedGREG/
 * 增加 `preload.js`（目前没有实际运用）
 * 程序主页增加版本信息
 * 修复：断开通道后主页按钮不更新的bug
+
+### v1.0.4
+
+* 增加私钥文件登录
+* 

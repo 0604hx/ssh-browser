@@ -1,5 +1,6 @@
 // import { tunnel, checkSSH } from './tunnel'
 const Tunnel = require("./tunnel")
+const fs = require('fs')
 // const {tunnel, checkSSH} = window.require("./tunnel")
 
 let instance    //当前 SSH 连接
@@ -7,6 +8,8 @@ let ports = {}  //本地已监听端口
 let config
 
 let LOCALHOST = "127.0.0.1"
+let TYPE_RAW = "raw"
+let TYPE_PRIVATE_KEY = "key"
 
 const _isOnWork = ()=> !!instance && !!instance._handle
 
@@ -14,10 +17,9 @@ const _buildConfig = cfg=>{
     //处理 server 的ip跟端口
     let host = cfg.host.split(":")
 
-    return {
+    let sshConfig = {
         protocol: cfg.protocol || "http",
-        username:cfg.user,
-        password:cfg.password,
+        username:cfg.user || "root",
         host:host[0],
         port: host.length == 1?22:parseInt(host[1]),
         dstHost: cfg.dstHost || LOCALHOST,
@@ -26,6 +28,14 @@ const _buildConfig = cfg=>{
         localPort: cfg.localPort? parseInt(cfg.localPort) : 8000,
         keepAlive:true
     }
+    if(cfg.type == TYPE_PRIVATE_KEY){
+        //判读私钥文件是否存在
+        if(!fs.existsSync(cfg.password))
+            throw Error("私钥文件不存在<br>"+cfg.password)
+        sshConfig.privateKey = fs.readFileSync(cfg.password)
+    }else
+        sshConfig.password = cfg.password
+    return sshConfig
 }
 
 module.exports = {
@@ -45,8 +55,12 @@ module.exports = {
             if(_isOnWork())
                 //已经存在 连接
                 return reject(new Error(`已经存在本地端口映射 ${config.local}, 请先关闭再连接`))
-            
-            let _cfg = _buildConfig(cfg)
+            let _cfg
+            try{
+                _cfg = _buildConfig(cfg)
+            }catch(cfgE){
+                reject(cfgE)
+            }
 
             Tunnel.checkSSH(_cfg)
             .then(d=>{

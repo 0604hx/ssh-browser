@@ -20,7 +20,7 @@
                             <Button type="ghost" shape="circle" size="small" icon="ios-trash" @click="del($ti)" title="删除"></Button>
                         </span>
                         <p class="info"><b>{{t.user}} @ {{t.host}}</b></p>
-                        <div class="h">{{t.type=='pwd'?"密码方式授权":"私钥文件授权"}}</div>
+                        <div class="h">{{t.type=='raw'?"密码方式授权":"私钥文件授权"}}</div>
                         <p class="h">本地端口 <span class="ml10 info">{{t.localPort}}</span></p>
                         <p class="h">远程映射 <span class="ml10 info">{{t.protocol}}://{{t.dstHost}}:{{t.dstPort}}</span></p>
                         

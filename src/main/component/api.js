@@ -63,9 +63,14 @@ module.exports = (mainWindow) => {
     })
 
     ipcMain.on(SSH_TEST, (e, args)=>{
-        SshUtil.test(args)
-        .then(d=>e.sender.send(SSH_TEST, d))
-        .catch(err=>e.sender.send(SSH_TEST, "无法连接到 SSH 服务器，请检查你的帐密或者私钥是否正确: code="+err.code))
+        try{
+            SshUtil.test(args)
+            .then(d=>e.sender.send(SSH_TEST, d))
+            .catch(err=>e.sender.send(SSH_TEST, "无法连接到 SSH 服务器，请检查你的帐密或者私钥是否正确: code="+err.code))
+        }catch(ee){
+            Tip.fail(ee.message)
+            e.sender.send(SSH_TEST)
+        }
     })
 
     /**
